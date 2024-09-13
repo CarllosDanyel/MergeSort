@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Random;
+
 public class RadixSort {
     public static void radixSort(int[] arr) {
         int max = getMax(arr);
@@ -39,5 +42,27 @@ public class RadixSort {
         }
 
         System.arraycopy(output, 0, arr, 0, n);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[100000];
+        Random rand = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rand.nextInt(1000000); // Preenche o array com números aleatórios
+        }
+
+        long startTime = System.nanoTime();
+        radixSort(arr);
+        long endTime = System.nanoTime();
+
+        long duration = endTime - startTime;
+        long seconds = duration / 1_000_000_000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+
+        System.out.printf("Sorted array: %s%n", Arrays.toString(Arrays.copyOf(arr, 10))); // Mostra os primeiros 10 elementos
+        System.out.printf("Execution time: %02d:%02d:%02d%n", hours, minutes, seconds);
     }
 }
